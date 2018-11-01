@@ -10,14 +10,14 @@ namespace StampReader.Tests
         public void ConvertInputToStampQueryFomatMulti_T1_SingleEntry()
         {
             string myInput = "1345";
-            string myResult = StringTools.ConvertInputToStampQueryFomatMulti(myInput);
+            string myResult = StringTools.ConvertInputToMultiFormat(myInput);
             Assert.AreEqual("('1345')", myResult);
         }
         [TestMethod()]
         public void ConvertInputToStampQueryFomatMulti_T2_MultiEntry()
         {
             string myInput = "1345;4798;873;t3544";
-            string myResult = StringTools.ConvertInputToStampQueryFomatMulti(myInput);
+            string myResult = StringTools.ConvertInputToMultiFormat(myInput);
             Assert.AreEqual("('1345','4798','873','t3544')", myResult);
         }
     }

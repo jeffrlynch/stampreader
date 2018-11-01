@@ -27,7 +27,7 @@ namespace StampReader
                 $"WHERE myC.ScottNumber='{appOptions.StampsToFind}'";
                     break;
                 case "multi":
-                    string myStamps = StringTools.ConvertInputToStampQueryFomatMulti(appOptions.StampsToFind);
+                    string myStamps = StringTools.ConvertInputToMultiFormat(appOptions.StampsToFind);
                     MyQuery = "select myC.ScottNumber, Year(v.DateIssued) AS YearIssued," +
                  "v.DescriptiveName, v.VarietyDenomination,v.Perforation, myC.StampType, myC.Condition, " +
                  "c.CountryName, sa.AlbumDescription, myC.AlbumPage " +
@@ -43,8 +43,8 @@ namespace StampReader
                         Console.WriteLine("Must specify year of stamp, using the -y switch");
                         Environment.Exit(1);
                     }
-                    MyTableResults = GetStampsForYear(StampDB,appOptions.NumParam);
-                    DataTable OwnedStamps = GetOwnedStampsForYear(StampDB, appOptions.NumParam);
+                    MyTableResults = GetStampsForYear(StampDB,appOptions.NumParam,Properties.Settings.Default.srchCountry);
+                    DataTable OwnedStamps = GetOwnedStampsForYear(StampDB, appOptions.NumParam, Properties.Settings.Default.srchCountry);
                     DataTable MissingStamps = DetermineMissingStampsForYear(MyTableResults, OwnedStamps);
                     resultsFinalized = true;
                     break;
@@ -52,7 +52,7 @@ namespace StampReader
             if (!resultsFinalized)
                 MyTableResults = StampDB.Query(MyQuery);
         }
-        private DataTable GetStampsForYear(DB StampDB, int DesiredYear)
+        private DataTable GetStampsForYear(DB StampDB, int Year,string Country)
         {
             MyQuery = "SELECT ScottNum, Year(v.DateIssued) AS YearIssued,DescriptiveName,VarietyDenomination,Perforation," +
                         "sv.[Mint-VF],sv.[Mint-F],sv.[Mint-VG]," +
@@ -61,17 +61,20 @@ namespace StampReader
                         "FROM((Varieties v " +
                         "INNER JOIN Countries c ON v.CountryID=c.CountryID) " +
                         "LEFT JOIN[SMVal~2018] sv ON v.VarietyID=sv.VarietyID) " +
-                        "WHERE c.CountryName=\"United States\" " +
-                        $"AND Year(v.DateIssued)={DesiredYear} " +
+                        $"WHERE c.CountryName=\"{Country}\" " +
+                        $"AND Year(v.DateIssued)={Year} " +
                         "AND ScottNum not like \"R*\" " +
                         "AND ScottNum not like \"U*\"";
             return StampDB.Query(MyQuery);
         }
-        private DataTable GetOwnedStampsForYear(DB StampDB, int DesiredYear)
+        private DataTable GetOwnedStampsForYear(DB StampDB, int Year, string Country)
         {
-            string StampsIOwnForYear = "select distinct scottnumber from myCollection " +
-                        "inner join varieties ON myCollection.varietyID=varieties.varietyID " +
-                        $"where Year(varieties.DateIssued)={DesiredYear}";
+            string StampsIOwnForYear = "SELECT DISTINCT scottnumber " +
+                        "FROM ((myCollection myC " +
+                        "INNER JOIN Varieties v ON myC.varietyID=v.varietyID) " +
+                        "INNER JOIN Countries c ON v.CountryID=c.CountryID) " +
+                        $"WHERE c.CountryName=\"{Country}\" " +
+                        $"AND Year(v.DateIssued)={Year}";
             return StampDB.Query(StampsIOwnForYear);
         }
         private DataTable DetermineMissingStampsForYear(DataTable StampsForYear, DataTable StampsOwnedForYear)

@@ -106,5 +106,17 @@ namespace StampReader.Properties {
                 this["includeSPecials"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("United States")]
+        public string srchCountry {
+            get {
+                return ((string)(this["srchCountry"]));
+            }
+            set {
+                this["srchCountry"] = value;
+            }
+        }
     }
 }

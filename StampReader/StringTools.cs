@@ -8,7 +8,7 @@ namespace StampReader
 {
     public static class StringTools
     {
-        public static string ConvertInputToStampQueryFomatMulti(string Input)
+        public static string ConvertInputToMultiFormat(string Input)
         {
             string result = string.Empty;
             if (string.IsNullOrEmpty(Input))
