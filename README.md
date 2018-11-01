@@ -7,13 +7,10 @@ Execution Parameters:
 Short|Long|Comment
 -|-|-
 m|mode|Execution mode, **required** can be on of the following: single, multi, missingyear
-i|input|blah
+i|input|specify the stamp scotts number(s) mutliple entries are semi-colon delimted i.e.: 201;2401;129
 y|year|Used in conjunction with the -m missing year option to specify what year to lookup
 j|jsonout|Create JSON Output
 
 Usage:
 stampreader -m missingyear -y 1975
 Will check the StampManage DB to see what stamps are not owned for that year.
-
-
-> Written with [StackEdit](https://stackedit.io/).
