@@ -1,5 +1,6 @@
+﻿
 # stampreader
-A small search utility for the StampManage Database
+a small search utility for the StampManage Database
 While StampManage is a great solution offered by Liberty Street Software, I just wanted a way to quickly find Stamp information from a command prompt.The express purpose of this application is to quickly find stampe details (with pricing) from a command prompt while browsing Ebay to expand my collection. StampManages offers reporting options but in my mind seems simpler to just run a command rather than loading the application and issue a report
 Execution Parameters:
 |Short Switch|Long Switch|Comment
