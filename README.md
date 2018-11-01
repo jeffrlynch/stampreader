@@ -4,7 +4,7 @@ The express purpose of this application is to quickly find stamp details (with p
 
 For Information:
 * StampManage by Liberty Street Software: https://www.libertystreet.com/Stamp-Collecting-Software.htm
-* Information about "Scott" Numbers: https://findyourstampsvalue.com/helpful-terms/scott-numbers
+* "Scott" Numbers: https://findyourstampsvalue.com/helpful-terms/scott-numbers
 
 ##Execution Parameters
 
