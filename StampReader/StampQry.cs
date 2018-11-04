@@ -17,6 +17,7 @@ namespace StampReader
             switch (appOptions.Mode.ToLower())
             {
                 case "single":
+                case "s":
                     MyQuery = "select myC.ScottNumber, Year(v.DateIssued) AS YearIssued," +
                 "v.DescriptiveName, v.VarietyDenomination,v.Perforation, myC.StampType, myC.Condition, " +
                 "c.CountryName, sa.AlbumDescription, myC.AlbumPage " +
@@ -27,6 +28,7 @@ namespace StampReader
                 $"WHERE myC.ScottNumber='{appOptions.StampsToFind}'";
                     break;
                 case "multi":
+                case "m":
                     string myStamps = StringTools.ConvertInputToMultiFormat(appOptions.StampsToFind);
                     MyQuery = "select myC.ScottNumber, Year(v.DateIssued) AS YearIssued," +
                  "v.DescriptiveName, v.VarietyDenomination,v.Perforation, myC.StampType, myC.Condition, " +
@@ -38,6 +40,7 @@ namespace StampReader
                  $"WHERE myC.ScottNumber in {myStamps} ORDER BY v.DateIssued ASC";
                     break;
                 case "missingyear":
+                case "my":
                     if (appOptions.NumParam < 1800)
                     {
                         Console.WriteLine("Must specify year of stamp, using the -y switch");

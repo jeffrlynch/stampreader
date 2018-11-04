@@ -26,9 +26,14 @@ namespace StampReader
             }
             //3.Perform Query based on inputs
             StampQry myStampQry = new StampQry(StampDB, options);
-            FilterResults filterResults = new FilterResults(myStampQry.MyTableResults);
-            PrintResults(options, filterResults.FilteredDT);
-            PrintSummary(filterResults.FilteredDT,options);
+            if (options.Mode == "my" || options.Mode == "missingyear")
+            {
+                FilterResults filterResults = new FilterResults(myStampQry.MyTableResults);
+                PrintResults(options, filterResults.FilteredDT);
+                PrintSummary(filterResults.FilteredDT, options);
+            }
+            else
+                PrintResults(options, myStampQry.MyTableResults);
             Console.WriteLine("\n");
             //Console.ReadKey();
         }
