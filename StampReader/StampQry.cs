@@ -27,6 +27,17 @@ namespace StampReader
                 "INNER JOIN StampAlbums sa on myC.StampAlbumID=sa.AlbumID)" +
                 $"WHERE myC.ScottNumber='{appOptions.StampsToFind}'";
                     break;
+                case "sm":
+                    MyQuery = "SELECT ScottNum, Year(v.DateIssued) AS YearIssued,DescriptiveName,VarietyDenomination,Perforation," +
+                        "sv.[Mint-VF],sv.[Mint-F],sv.[Mint-VG]," +
+                        "sv.[Used-VF],sv.[Used-F],sv.[Used-VG]," +
+                        "sv.FDC,sv.PlateBlock,sv.Block4,sv.LinePair,Commemorative,Definitive " +
+                        "FROM((Varieties v " +
+                        "INNER JOIN Countries c ON v.CountryID=c.CountryID) " +
+                        "LEFT JOIN[SMVal~2018] sv ON v.VarietyID=sv.VarietyID) " +
+                        $"WHERE c.CountryName=\"{Properties.Settings.Default.srchCountry}\" " +
+                        $"AND v.ScottNum=\"{appOptions.StampsToFind}\"";
+                    break;
                 case "multi":
                 case "m":
                     string myStamps = StringTools.ConvertInputToMultiFormat(appOptions.StampsToFind);
