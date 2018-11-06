@@ -5,7 +5,7 @@ namespace StampReader
 {
     public class ExecutionOptions
     {
-        [Option('m', "mode",Required=true,HelpText = "Specify Stamreader action (s (single),sm (single missing), m (multi), OR my(missingyear) ")]
+        [Option('m', "mode",Required=true,HelpText = "Specify Stamreader action (s (single), m (multi), OR my(missingyear) ")]
         public string Mode { get; set; }
         [Option('i', "input",Required =false,HelpText ="Specify Scott's Number(s) to search for")]
         public string StampsToFind { get; set; }

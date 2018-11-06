@@ -32,6 +32,13 @@ namespace StampReader
                 PrintResults(options, filterResults.FilteredDT);
                 PrintSummary(filterResults.FilteredDT, options);
             }
+            else if (options.Mode=="s")
+            {
+                Console.WriteLine($"No results for selected stamp:{options.StampsToFind}, fetching price details for comparison");
+                options.Mode = "sm";
+                myStampQry = new StampQry(StampDB, options);
+                PrintResults(options, myStampQry.MyTableResults);
+            }
             else
                 PrintResults(options, myStampQry.MyTableResults);
             Console.WriteLine("\n");
