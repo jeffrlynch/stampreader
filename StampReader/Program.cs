@@ -32,7 +32,7 @@ namespace StampReader
                 PrintResults(options, filterResults.FilteredDT);
                 PrintSummary(filterResults.FilteredDT, options);
             }
-            else if (options.Mode=="s")
+            else if (options.Mode=="s" && myStampQry.MyTableResults.Rows.Count<1)
             {
                 Console.WriteLine($"No results for selected stamp:{options.StampsToFind}, fetching price details for comparison");
                 options.Mode = "sm";
