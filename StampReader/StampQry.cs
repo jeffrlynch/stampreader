@@ -7,48 +7,52 @@ namespace StampReader
 {
     public class StampQry
     {
-        //TBD
-        //string qryStampAlbums = "SELECT * FROM StampAlbums";
         public string MyQuery { get; private set; } = string.Empty;
         public DataTable MyTableResults { get; set; } = new DataTable("EmptyTable");
         private bool resultsFinalized = false;
         public StampQry(DB StampDB, ExecutionOptions appOptions)
         {
+            string myStamps = string.Empty;
+            string myCollections = StringTools.ConvertInputToMultiFormat(Properties.Settings.Default.srchCollections);
             switch (appOptions.Mode.ToLower())
             {
                 case "single":
                 case "s":
                     MyQuery = "select myC.ScottNumber, Year(v.DateIssued) AS YearIssued," +
-                "v.DescriptiveName, v.VarietyDenomination,v.Perforation, myC.StampType, myC.Condition, " +
-                "c.CountryName, sa.AlbumDescription, myC.AlbumPage " +
-                "FROM (((mycollection myC " +
-                "INNER JOIN Varieties v ON myC.VarietyID=v.VarietyID) " +
-                "INNER JOIN Countries c on v.CountryID=c.CountryID) " +
-                "INNER JOIN StampAlbums sa on myC.StampAlbumID=sa.AlbumID)" +
-                $"WHERE myC.ScottNumber='{appOptions.StampsToFind}'";
+                        "v.DescriptiveName, v.VarietyDenomination,v.Perforation, myC.StampType, myC.Condition, " +
+                        "c.CountryName, sa.AlbumDescription, myC.AlbumPage " +
+                        "FROM (((mycollection myC " +
+                        "INNER JOIN Varieties v ON myC.VarietyID=v.VarietyID) " +
+                        "INNER JOIN Countries c on v.CountryID=c.CountryID) " +
+                        "LEFT JOIN StampAlbums sa on myC.StampAlbumID=sa.AlbumID)" +
+                        $"WHERE myC.ScottNumber='{appOptions.StampsToFind}'" +
+                        $"AND CollectionName in {myCollections};";
                     break;
                 case "sm":
+                    myStamps = StringTools.ConvertInputToMultiFormat(appOptions.StampsToFind);
                     MyQuery = "SELECT ScottNum, Year(v.DateIssued) AS YearIssued,DescriptiveName,VarietyDenomination,Perforation," +
                         "sv.[Mint-VF],sv.[Mint-F],sv.[Mint-VG]," +
                         "sv.[Used-VF],sv.[Used-F],sv.[Used-VG]," +
                         "sv.FDC,sv.PlateBlock,sv.Block4,sv.LinePair,Commemorative,Definitive " +
                         "FROM((Varieties v " +
                         "INNER JOIN Countries c ON v.CountryID=c.CountryID) " +
-                        "LEFT JOIN[SMVal~2018] sv ON v.VarietyID=sv.VarietyID) " +
+                        "LEFT JOIN[SMVal~2019] sv ON v.VarietyID=sv.VarietyID) " +
                         $"WHERE c.CountryName=\"{Properties.Settings.Default.srchCountry}\" " +
-                        $"AND v.ScottNum=\"{appOptions.StampsToFind}\"";
+                        $"AND v.ScottNum in {myStamps}";
                     break;
                 case "multi":
                 case "m":
-                    string myStamps = StringTools.ConvertInputToMultiFormat(appOptions.StampsToFind);
+                    myStamps = StringTools.ConvertInputToMultiFormat(appOptions.StampsToFind);
                     MyQuery = "select myC.ScottNumber, Year(v.DateIssued) AS YearIssued," +
-                 "v.DescriptiveName, v.VarietyDenomination,v.Perforation, myC.StampType, myC.Condition, " +
-                 "c.CountryName, sa.AlbumDescription, myC.AlbumPage " +
-                 "FROM (((mycollection myC " +
-                 "INNER JOIN Varieties v ON myC.VarietyID=v.VarietyID) " +
-                 "INNER JOIN Countries c on v.CountryID=c.CountryID) " +
-                 "INNER JOIN StampAlbums sa on myC.StampAlbumID=sa.AlbumID)" +
-                 $"WHERE myC.ScottNumber in {myStamps} ORDER BY v.DateIssued ASC";
+                    "v.DescriptiveName, v.VarietyDenomination,v.Perforation, myC.StampType, myC.Condition, " +
+                    "c.CountryName, sa.AlbumDescription, myC.AlbumPage " +
+                    "FROM (((mycollection myC " +
+                    "INNER JOIN Varieties v ON myC.VarietyID=v.VarietyID) " +
+                    "INNER JOIN Countries c on v.CountryID=c.CountryID) " +
+                    "INNER JOIN StampAlbums sa on myC.StampAlbumID=sa.AlbumID)" +
+                    $"WHERE myC.ScottNumber in {myStamps} " +
+                    $"AND CollectionName in {myCollections} " +
+                    $"ORDER BY v.DateIssued ASC";
                     break;
                 case "missingyear":
                 case "my":
@@ -74,7 +78,7 @@ namespace StampReader
                         "sv.FDC,sv.PlateBlock,sv.Block4,sv.LinePair,Commemorative,Definitive " +
                         "FROM((Varieties v " +
                         "INNER JOIN Countries c ON v.CountryID=c.CountryID) " +
-                        "LEFT JOIN[SMVal~2018] sv ON v.VarietyID=sv.VarietyID) " +
+                        "LEFT JOIN[SMVal~2019] sv ON v.VarietyID=sv.VarietyID) " +
                         $"WHERE c.CountryName=\"{Country}\" " +
                         $"AND Year(v.DateIssued)={Year} " +
                         "AND ScottNum not like \"R*\" " +

@@ -12,7 +12,7 @@ namespace StampReader.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace StampReader.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\temp\\stampdb\\STAMPDATA.MDB")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\temp\\stamp\\STAMPDATA.MDB")]
         public string StampDB {
             get {
                 return ((string)(this["StampDB"]));
@@ -37,7 +37,7 @@ namespace StampReader.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\stampdb\\stampInfo.json")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\stamp\\stampInfo.json")]
         public string JSonFileOutput {
             get {
                 return ((string)(this["JSonFileOutput"]));
@@ -85,7 +85,7 @@ namespace StampReader.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool includeCommemorativeOnly {
             get {
                 return ((bool)(this["includeCommemorativeOnly"]));
@@ -116,6 +116,18 @@ namespace StampReader.Properties {
             }
             set {
                 this["srchCountry"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("My Collection;MysticPurchase")]
+        public string srchCollections {
+            get {
+                return ((string)(this["srchCollections"]));
+            }
+            set {
+                this["srchCollections"] = value;
             }
         }
     }

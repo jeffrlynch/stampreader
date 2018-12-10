@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -42,7 +43,8 @@ namespace StampReader
             else
                 PrintResults(options, myStampQry.MyTableResults);
             Console.WriteLine("\n");
-            //Console.ReadKey();
+            if (Debugger.IsAttached)
+                Console.ReadKey();
         }
         private static void PrintSummary(DataTable results, ExecutionOptions options)
         {

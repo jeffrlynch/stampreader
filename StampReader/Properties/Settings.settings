@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="StampDB" Type="System.String" Scope="User">
-      <Value Profile="(Default)">c:\temp\stampdb\STAMPDATA.MDB</Value>
+      <Value Profile="(Default)">c:\temp\stamp\STAMPDATA.MDB</Value>
     </Setting>
     <Setting Name="JSonFileOutput" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\temp\stampdb\stampInfo.json</Value>
+      <Value Profile="(Default)">C:\temp\stamp\stampInfo.json</Value>
     </Setting>
     <Setting Name="includeAllVarieties" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -18,13 +18,16 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="includeCommemorativeOnly" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="includeSPecials" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="srchCountry" Type="System.String" Scope="User">
       <Value Profile="(Default)">United States</Value>
+    </Setting>
+    <Setting Name="srchCollections" Type="System.String" Scope="User">
+      <Value Profile="(Default)">My Collection;MysticPurchase</Value>
     </Setting>
   </Settings>
 </SettingsFile>
