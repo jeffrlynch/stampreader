@@ -85,7 +85,7 @@ namespace StampReader.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool includeCommemorativeOnly {
             get {
                 return ((bool)(this["includeCommemorativeOnly"]));
@@ -98,12 +98,12 @@ namespace StampReader.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool includeSPecials {
+        public bool includeSpecials {
             get {
-                return ((bool)(this["includeSPecials"]));
+                return ((bool)(this["includeSpecials"]));
             }
             set {
-                this["includeSPecials"] = value;
+                this["includeSpecials"] = value;
             }
         }
         

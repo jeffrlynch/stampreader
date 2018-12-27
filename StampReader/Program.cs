@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace StampReader
 {
@@ -22,7 +23,7 @@ namespace StampReader
             DB StampDB = new DB(Properties.Settings.Default.StampDB);
             if (!StampDB.IsValid)
             {
-                Console.WriteLine("Couldn't located the Stamp Database");
+                Console.WriteLine("Unable to locate Stamp Collection Database");
                 Environment.Exit(1);
             }
             //3.Perform Query based on inputs
@@ -50,7 +51,7 @@ namespace StampReader
         {
             if (results.Rows.Count > 1)
             {
-                decimal SumVF = results.AsEnumerable()
+                decimal SumVF = results.AsEnumerable().Where(snum=> Regex.IsMatch(snum.Field<string>("ScottNum"), @"\d$"))
                     .Where(x => x["Mint-VF"] != DBNull.Value)
                     .Sum(x => x.Field<decimal>("Mint-VF"));
                 Console.WriteLine($"{results.Rows.Count} stamps identified for year:{options.NumParam}");

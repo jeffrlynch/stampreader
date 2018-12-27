@@ -100,7 +100,7 @@ namespace StampReader
             //1.Create List of Owned Stamps
             List<string> ownedStampNumbers = (from row in StampsOwnedForYear.AsEnumerable()
                                               select row.Field<string>("scottnumber")).Distinct().ToList();
-            //2.Check Stamps Available for specified year and determine ones i own
+            //2.Check Stamps Available for specified year and determine ones I own
             List<DataRow> DetermineRowsFromYearAlreadyOwned = (from row in StampsForYear.AsEnumerable()
                                  where ownedStampNumbers.Contains(row.Field<string>("ScottNum"))
                                  select row).ToList();

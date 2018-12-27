@@ -24,7 +24,7 @@ namespace StampReader
                 FilterDefinitives(FilteredDT);
             if (Properties.Settings.Default.includeCommemorativeOnly)
                 OnlyCommemoratives(FilteredDT);
-            if (!Properties.Settings.Default.includeSPecials)
+            if (!Properties.Settings.Default.includeSpecials)
                 RemoveSpecials(FilteredDT);
             
         }
